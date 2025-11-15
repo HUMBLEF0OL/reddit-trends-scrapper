@@ -11,7 +11,17 @@ OUTPUT_CSV=f"scraps/reddit_{SUBREDDIT}_{time.strftime('%Y-%m-%d %H-%M-%S')}.csv"
 # endpoint details
 ENDPOINT=f"https://www.reddit.com/r/{SUBREDDIT}/top/.json?t={TIME_FILTER}&limit={LIMIT}"
 
-headers = {"User-Agent": "Mozilla/5.0"}
+headers = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Referer": "https://www.google.com/",
+}
+
 response = requests.get(ENDPOINT, headers=headers)
 if response.status_code != 200:
     raise Exception(f"Request failed with status code {response.status_code}")
